@@ -1,51 +1,54 @@
-const arr = ['html', 'css', 'js', 'ts', 'git', 'github', 'vscode'];
-console.log('arr:', arr);
-console.log('arr[0]:', arr[0]);
-console.log('arr[2]:', arr[2]);
+// class Person {
+//   prop: number;
+//   prop2!: number; //не знаю что там будет, я потом сама инициализирую значение
+//   prop3?: number; // не знаю, будет свойство вообще или нет ???(может undefind | null и тогда будем обрабатывать по-другому)
+//   constructor() {
+//     this.prop = 123;
+//     // this.prop2 = ?? обязательно будет получен позже !!!!
+//     // this.prop3 = ?? возможно будет получен, но может и не будет ????
+//   }
+// }
 
-enum Skills {
-  HTML,
-  CSS,
-  JS,
-  TS,
-  Git,
-  Github,
-  VSCode
+// публичные, приватные и защищенные свойства
+// вариант JS
+// class Person {
+//   public name: string;
+//   protected age: number;
+//   private gender: string;
+//   skills: string[];
+
+//   constructor(name: string, age: number, gender: string, skills: string[]) {
+//     this.name = name;
+//     this.age = age;
+//     this.gender = gender;
+//     this.skills = skills;
+//   }
+// }
+
+// вариант TS
+// можно взять модификатор доступа, подставить его в конструктор и его не нужно будет объявлять и присваивать, свойства создадутся автоматически
+class Person {
+  //     не нужно объявлять
+  //   public name: string;
+  //   protected age: number;
+  //   private gender: string;
+  //   skills: string[];
+
+  constructor(
+    public name: string,
+    protected age: number,
+    private gender: string,
+    public skills: string[]
+  ) {
+    //   не нужно присваивать
+    // this.name = name;
+    // this.age = age;
+    // this.gender = gender;
+    // this.skills = skills;
+  }
 }
 
-// пробросили ошибку и дальше код не работает. если функция никогда ничего не вернет, ей можно указать специальный тип never, значение которого никогда не наступает
-// never является подтипом any
-// переменная с типом never может быть присвоена переменной любого другого типа
-function error(msg: string): never {
-  throw new Error(msg);
-  console.log('error???'); //недостижимый код
-}
-console.log("🚀 ~ error('!!error!!'):", error('!!error!!'));
-// fail вызывая ошибку - тоже никогда ничего не вернет
-function fail(): never {
-  error('Моя ошибка');
-}
-// и бесконечный цикл ГЛАВНОЕ - НЕ ВЫЗВАТЬ))) а то зависнем
-function infiniteLoop(): never {
-  while (true) {}
-}
-
-//
-
-function log(msg: string): void {
-  console.log(msg);
-}
-
-//
-
-let num: number | null | undefined;
-// нужно
-num = 1;
-num = NaN;
-num = undefined;
-num = null;
-// не нужно? будет считаться ошибкой
-// num = '';
-// num = true;
-// num = [];
-// num = {};
+const person = new Person('Jhon', 25, 'male', ['html', 'css']);
+console.log('🚀 ~ person:', person);
+console.log('🚀 ~ person.name:', person.name);
+console.log('🚀 ~ person.skills:', person.skills);
