@@ -10,14 +10,18 @@
 //   }
 // }
 class Person {
-    constructor(name, age, gender, skills) {
+    constructor(name, age, gender, skills //приватное свойство доступно только внутри класса
+    ) {
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.skills = skills;
         this.year = 1970;
     }
+    getSkillsToUpperCase() {
+        return this.skills.map((el) => el.toUpperCase()); //приватное свойство доступно только внутри класса
+    }
 }
 Person.isHuman = true;
-// не нужно инициализировать экзкмпляр, обращаемся напрямую к свойству static
-console.log(Person.isHuman);
+const person = new Person('Jhon', 25, 'male', ['html', 'css']);
+console.log(person.getSkillsToUpperCase());

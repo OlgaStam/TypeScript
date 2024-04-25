@@ -12,12 +12,16 @@
 class Person {
   readonly year: number = 1970;
   static isHuman: boolean = true;
+
   constructor(
     public name: string,
-    protected age: number,
+    public age: number,
     private gender: string,
-    public skills: string[]
+    private skills: string[] //приватное свойство доступно только внутри класса
   ) {}
+  public getSkillsToUpperCase(): string[] {
+    return this.skills.map((el) => el.toUpperCase()); //приватное свойство доступно только внутри класса
+  }
 }
-// не нужно инициализировать экзкмпляр, обращаемся напрямую к свойству static
-console.log(Person.isHuman);
+const person = new Person('Jhon', 25, 'male', ['html', 'css']);
+console.log(person.getSkillsToUpperCase());
