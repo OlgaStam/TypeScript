@@ -1,25 +1,30 @@
-let strJS = 'any string'
-let strTS: string = 'any string'
+const numArrJS = [1, 2, 3];
+const numArrTS: number[] = [1, 2, 3];
+const numArrTS2: Array<number> = [1, 2, 3];
 
-let numJS = 123
-let numTS: number = 123
+const strArrJS = ['1', '2', '3'];
+const strArrTS: string[] = ['1', '2', '3'];
+const strArrTS2: Array<string> = ['1', '2', '3'];
 
-let boolJS = true
-let boolTS: boolean = true
+const boolArrJS = [true, false];
+const boolArrTS: boolean[] = [true, false];
+const boolArrTS2: Array<boolean> = [true, false];
 
-let anyType: any
-anyType = 1
-anyType = 'str'
-anyType = true
-anyType = []
-anyType = {}
+const someTypesArrJS = [1, 'str', false];
+const someTypesArrTS: (number | string | boolean)[] = [
+  1,
+  'str',
+  false,
+  2,
+  false
+];
 
-let strNumType: string | number
-strNumType = 'str'
-strNumType = 123
+const tupplesArrTS: [number, number, number, string, boolean] = [
+  1,
+  2,
+  3,
+  'str',
+  false
+];
 
-let strNumTypeBool: string | number|boolean
-strNumTypeBool = 'str'
-strNumTypeBool = 123
-strNumTypeBool = true
-
+const anyArrTS: any[] = [{}, [], 3, 'str', false];

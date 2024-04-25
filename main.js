@@ -1,20 +1,26 @@
 "use strict";
-let strJS = 'any string';
-let strTS = 'any string';
-let numJS = 123;
-let numTS = 123;
-let boolJS = true;
-let boolTS = true;
-let anyType;
-anyType = 1;
-anyType = 'str';
-anyType = true;
-anyType = [];
-anyType = {};
-let strNumType;
-strNumType = 'str';
-strNumType = 123;
-let strNumTypeBool;
-strNumTypeBool = 'str';
-strNumTypeBool = 123;
-strNumTypeBool = true;
+const numArrJS = [1, 2, 3];
+const numArrTS = [1, 2, 3];
+const numArrTS2 = [1, 2, 3];
+const strArrJS = ['1', '2', '3'];
+const strArrTS = ['1', '2', '3'];
+const strArrTS2 = ['1', '2', '3'];
+const boolArrJS = [true, false];
+const boolArrTS = [true, false];
+const boolArrTS2 = [true, false];
+const someTypesArrJS = [1, 'str', false];
+const someTypesArrTS = [
+    1,
+    'str',
+    false,
+    2,
+    false
+];
+const tupplesArrTS = [
+    1,
+    2,
+    3,
+    'str',
+    false
+];
+const anyArrTS = [{}, [], 3, 'str', false];
