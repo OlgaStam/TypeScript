@@ -4,10 +4,10 @@ function getNameTS(name: string): string {
 function getAgeTS(age: number): number {
   return age;
 }
-console.log("🚀 ~ getNameTS('Jhon'):", getNameTS('Jhon'));
-console.log('🚀 ~ getAgeTS(25):', getAgeTS(25));
 
-function getNameAge(name: string, age: number): string {
+function getNameAge(name: string = 'Guest', age: number = 18): string {
   return `${name}, ${age}`;
 }
 console.log("🚀 ~ getNameAge ('Bob', 30):", getNameAge('Bob', 30));
+console.log("🚀 ~ getNameAge ('Bob'):", getNameAge('Bob'));
+console.log("🚀 ~ getNameAge ('Bob'):", getNameAge());
