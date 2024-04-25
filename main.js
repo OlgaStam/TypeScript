@@ -1,27 +1,40 @@
 "use strict";
-// class Person {
-//   prop: number;
-//   prop2!: number; //не знаю что там будет, я потом сама инициализирую значение
-//   prop3?: number; // не знаю, будет свойство вообще или нет ???(может undefind | null и тогда будем обрабатывать по-другому)
-//   constructor() {
-//     this.prop = 123;
-//     // this.prop2 = ?? обязательно будет получен позже !!!!
-//     // this.prop3 = ?? возможно будет получен, но может и не будет ????
-//   }
-// }
 class Person {
-    constructor(name, age, gender, skills //приватное свойство доступно только внутри класса
-    ) {
+    constructor(name, 
+    // private age: number, //приватное свойство доступно только внутри класса, не наследуется
+    //protected свойство доступно внутри класса наследника, снаружи не доступно
+    age, gender) {
         this.name = name;
         this.age = age;
         this.gender = gender;
-        this.skills = skills;
         this.year = 1970;
     }
-    getSkillsToUpperCase() {
-        return this.skills.map((el) => el.toUpperCase()); //приватное свойство доступно только внутри класса
+    getAge() {
+        return `Person ${this.name} is ${this.age}`;
     }
 }
 Person.isHuman = true;
-const person = new Person('Jhon', 25, 'male', ['html', 'css']);
-console.log(person.getSkillsToUpperCase());
+const person = new Person('Jhon', 25, 'male');
+console.log(person.getAge());
+// наследование
+class Developer extends Person {
+    constructor(name, age, // Этот параметр можно использовать в конструкторе Developer, но он не будет доступен напрямую за пределами класса Developer
+    gender, 
+    // поскольку конструированием будет заниматься родитель, параметры из Person я только получу, без указания можификатора доступа
+    skills) {
+        // super() - это вызов конструктора родительского класса с переданными аргументами.Таким образом, перемтры передается в конструктор родителя
+        super(name, age, gender);
+        this.skills = skills;
+    }
+    getAge() {
+        // Здесь возраст будет доступен через метод getAge() класса Person
+        return `Developer ${this.name} is ${this.age}`;
+    }
+    getGender() {
+        return `${this.gender}`;
+    }
+}
+const developer = new Developer('Bob', 31, 'male', ['html', 'js']);
+console.log('🚀 ~ developer:', developer);
+console.log(developer.getAge());
+console.log(developer.getGender());
