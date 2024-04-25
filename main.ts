@@ -1,11 +1,13 @@
-const nameTS: string = 'Jhon';
-const ageTS: number = 25;
+function getNameTS(name: string): string {
+  return name;
+}
+function getAgeTS(age: number): number {
+  return age;
+}
+console.log("🚀 ~ getNameTS('Jhon'):", getNameTS('Jhon'));
+console.log('🚀 ~ getAgeTS(25):', getAgeTS(25));
 
-function getNameTS(): string {
-  return nameTS;
+function getNameAge(name: string, age: number): string {
+  return `${name}, ${age}`;
 }
-function getAgeTS(): number {
-  return ageTS;
-}
-console.log('🚀 ~ getNameJS:', getNameTS().toUpperCase());
-console.log('🚀 ~ getAgeJS:', getAgeTS().toFixed(2));
+console.log("🚀 ~ getNameAge ('Bob', 30):", getNameAge('Bob', 30));
