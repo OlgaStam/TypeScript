@@ -1,18 +1,47 @@
 "use strict";
-// Концепция обобщений (generics) в TypeScript позволяет создавать функции, классы и интерфейсы, которые могут работать с различными типами данных, не теряя при этом информации о типах. Это делает код более универсальным и повышает его переиспользуемость.
 //
-// Функция getData<T>(data: T): T представляет собой обобщенную функцию, которая принимает аргумент data типа T и возвращает значение того же типа T.Обобщенный параметр T может быть использован для представления произвольного типа данных.
-//
-function getData(data) {
-    return data;
+// class Multiplay {
+//   constructor(
+// чтобы решить проблему разростающихся типов придумали джейнерики
+//     private a: number | string | boolean,
+//     private b: number | string | boolean
+//   ) {}
+//   public getResult(): number {
+//     return +this.a * +this.b;
+//   }
+// }
+// const m: Multiplay = new Multiplay(4, 5);
+// console.log('m.getResult():', m.getResult());
+// const mNum: Multiplay = new Multiplay(4, 5);
+// console.log('mNum.getResult():', mNum.getResult());
+// const mStr: Multiplay = new Multiplay('4', '5');
+// console.log('mStr.getResult():', mStr.getResult());
+// const mBool: Multiplay = new Multiplay(true, true);
+// console.log('mBool.getResult():', mBool.getResult());
+// например, я хочу чтобы умножалиcь только строки или числа
+// для этого дополнительно делает extends
+class Multiplay {
+    constructor(a, b) {
+        this.a = a;
+        this.b = b;
+    }
+    getResult() {
+        return +this.a * +this.b;
+    }
 }
-// Вызов функции с различными типами данных
-console.log(getData('any string').length); // Возвращает длину строки
-console.log(getData(123).toFixed(2)); // Преобразует число в строку с двумя знаками после запятой
-// При вызове getData('any string') обобщенный параметр T заменяется на тип string, поэтому возвращаемое значение также имеет тип string, и мы можем использовать метод length, который определен для строк.
-// При вызове getData(123) обобщенный параметр T заменяется на тип number, поэтому возвращаемое значение также имеет тип number, и мы можем использовать метод toFixed, который определен для чисел.
-// const newGetDat = [];
-// чтобы показать что именно мы ждем мы должны сказать, что это тип - функция, мы что-то здесь получим и что-то должны вернуть, функцию типизируем также как и объявляли; название (data -> d) может быть любым, главное порядок. теперь можно присвоить только ф-ю соответствующего типа, которая принимает на вход одинакового типа данные, с ними работает и возвращает
-const newGetData = getData;
-console.log(newGetData('any string').length);
-console.log(newGetData(123).toFixed(2));
+// const mNum: Multiplay<number> = new Multiplay(4, 5);
+// console.log('mNum.getResult():', mNum.getResult());
+// const mStr: Multiplay<string> = new Multiplay('4', '5');
+// console.log('mStr.getResult():', mStr.getResult());
+// const mBool: Multiplay<boolean> = new Multiplay(true, true);
+// console.log('mBool.getResult():', mBool.getResult());
+// // тип можно не указывать, он подтянется автоматически
+// const mArr = new Multiplay([10], [7]);
+// console.log('mArr.getResult():', mArr.getResult());
+// // но если типы разные, будет проблема
+// const m = new Multiplay(10, '5');
+// console.log('m.getResult():', m.getResult());
+const mNum = new Multiplay(4, 5);
+console.log('mNum.getResult():', mNum.getResult());
+const mStr = new Multiplay('4', '5');
+console.log('mStr.getResult():', mStr.getResult());
