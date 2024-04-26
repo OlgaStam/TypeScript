@@ -1,48 +1,32 @@
-//
-// class Multiplay {
-//   constructor(
-// чтобы решить проблему разростающихся типов придумали джейнерики
-//     private a: number | string | boolean,
-//     private b: number | string | boolean
-//   ) {}
-
-//   public getResult(): number {
-//     return +this.a * +this.b;
-//   }
-// }
-// const m: Multiplay = new Multiplay(4, 5);
-// console.log('m.getResult():', m.getResult());
-// const mNum: Multiplay = new Multiplay(4, 5);
-// console.log('mNum.getResult():', mNum.getResult());
-// const mStr: Multiplay = new Multiplay('4', '5');
-// console.log('mStr.getResult():', mStr.getResult());
-// const mBool: Multiplay = new Multiplay(true, true);
-// console.log('mBool.getResult():', mBool.getResult());
-
-// например, я хочу чтобы умножалиcь только строки или числа
-// для этого дополнительно делает extends
-class Multiplay<T extends number | string> {
-  constructor(private a: T, private b: T) {}
-
-  public getResult(): number {
-    return +this.a * +this.b;
-  }
+function consoleLog(param: any) {
+  console.log(param);
 }
 
-// const mNum: Multiplay<number> = new Multiplay(4, 5);
-// console.log('mNum.getResult():', mNum.getResult());
-// const mStr: Multiplay<string> = new Multiplay('4', '5');
-// console.log('mStr.getResult():', mStr.getResult());
-// const mBool: Multiplay<boolean> = new Multiplay(true, true);
-// console.log('mBool.getResult():', mBool.getResult());
-// // тип можно не указывать, он подтянется автоматически
-// const mArr = new Multiplay([10], [7]);
-// console.log('mArr.getResult():', mArr.getResult());
-// // но если типы разные, будет проблема
-// const m = new Multiplay(10, '5');
-// console.log('m.getResult():', m.getResult());
+consoleLog(123);
+// в консоли появилось
+// 123
+console.log('consoleLog:', consoleLog);
+// в консоли появилось
+// consoleLog: ƒ consoleLog(param) {
+//   console.log(param);
+// }
 
-const mNum = new Multiplay(4, 5);
-console.log('mNum.getResult():', mNum.getResult());
-const mStr = new Multiplay('4', '5');
-console.log('mStr.getResult():', mStr.getResult());
+// добавили @ - функция стала ДЕКОРАТОРОМ и получила значение функции, к которой она прикреплена (т.е. сразу на следующей строке после декоратора идет его класс)
+@consoleLog
+class Person {
+  constructor(public name: string, public age: number) {
+    console.log('Hello from Person Constructor');
+  }
+}
+// в консоли появилось
+// class Person {
+//   constructor(name, age) {
+//       this.name = name;
+//       this.age = age;
+//       console.log('Hello from Person Constructor');
+//   }
+// }
+
+const person = new Person('Jhon', 25);
+// в консоли появилось
+// Hello from Person Constructor

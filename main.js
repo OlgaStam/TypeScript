@@ -1,47 +1,40 @@
 "use strict";
-//
-// class Multiplay {
-//   constructor(
-// чтобы решить проблему разростающихся типов придумали джейнерики
-//     private a: number | string | boolean,
-//     private b: number | string | boolean
-//   ) {}
-//   public getResult(): number {
-//     return +this.a * +this.b;
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+function consoleLog(param) {
+    console.log(param);
+}
+consoleLog(123);
+// в консоли выводится
+// 123
+console.log('consoleLog:', consoleLog);
+// в консоли выводится
+// consoleLog: ƒ consoleLog(param) {
+//   console.log(param);
+// }
+// добавили @ - функция стала ДЕКОРАТОРОМ и получила значение функции, к которой она прикреплена (т.е. сразу на следующей строке после декоратора идет его класс)
+let Person = class Person {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+        console.log('Hello from Person Constructor');
+    }
+};
+Person = __decorate([
+    consoleLog
+], Person);
+// в консоли выводится
+// class Person {
+//   constructor(name, age) {
+//       this.name = name;
+//       this.age = age;
+//       console.log('Hello from Person Constructor');
 //   }
 // }
-// const m: Multiplay = new Multiplay(4, 5);
-// console.log('m.getResult():', m.getResult());
-// const mNum: Multiplay = new Multiplay(4, 5);
-// console.log('mNum.getResult():', mNum.getResult());
-// const mStr: Multiplay = new Multiplay('4', '5');
-// console.log('mStr.getResult():', mStr.getResult());
-// const mBool: Multiplay = new Multiplay(true, true);
-// console.log('mBool.getResult():', mBool.getResult());
-// например, я хочу чтобы умножалиcь только строки или числа
-// для этого дополнительно делает extends
-class Multiplay {
-    constructor(a, b) {
-        this.a = a;
-        this.b = b;
-    }
-    getResult() {
-        return +this.a * +this.b;
-    }
-}
-// const mNum: Multiplay<number> = new Multiplay(4, 5);
-// console.log('mNum.getResult():', mNum.getResult());
-// const mStr: Multiplay<string> = new Multiplay('4', '5');
-// console.log('mStr.getResult():', mStr.getResult());
-// const mBool: Multiplay<boolean> = new Multiplay(true, true);
-// console.log('mBool.getResult():', mBool.getResult());
-// // тип можно не указывать, он подтянется автоматически
-// const mArr = new Multiplay([10], [7]);
-// console.log('mArr.getResult():', mArr.getResult());
-// // но если типы разные, будет проблема
-// const m = new Multiplay(10, '5');
-// console.log('m.getResult():', m.getResult());
-const mNum = new Multiplay(4, 5);
-console.log('mNum.getResult():', mNum.getResult());
-const mStr = new Multiplay('4', '5');
-console.log('mStr.getResult():', mStr.getResult());
+const person = new Person('Jhon', 25);
+// в консоли выводится
+// Hello from Person Constructor
