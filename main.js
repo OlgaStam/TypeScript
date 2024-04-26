@@ -17,5 +17,5 @@ const person = {
         console.log(`${msg}, ${this.name}!`);
     }
 };
-console.log('🚀 ~ person:', person);
+console.log('person:', person);
 person.greet('Hi');

@@ -19,14 +19,20 @@ getLength(obj); //20
 
 // -----------------
 
-interface PersonInterface {
+// interface PersonInterface {
+//   name: string;
+//   age: number;
+//   gender: string;
+//   greet(msg: string): void;
+// }
+type PersonType = {
   name: string;
   age: number;
   gender: string;
   greet(msg: string): void;
-}
+};
 
-const person: PersonInterface = {
+const person: PersonType = {
   name: 'Jhon',
   age: 25,
   gender: 'male',
