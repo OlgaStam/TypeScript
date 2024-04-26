@@ -1,32 +1,3 @@
-// function AddPrinter(constrClass: Function) {
-//   console.log(constrClass);
-// }
-
-// @AddPrinter
-// class Developer {
-//   constructor(
-//     public name: string,
-//     public age: number,
-//     public gender: string,
-//     public location: string
-//   ) {}
-//   printInfo() {
-//     const p = document.createElement('p');
-
-//     p.innerHTML = `${JSON.stringify(this)}<br>
-//     Имя: ${this.name}<br>
-//     Возраст: ${this.age}<br>
-//     Пол: ${this.gender}<br>
-//     Город: ${this.location}<br>
-//     `;
-
-//     document.body.append(p);
-//   }
-// }
-// const developer = new Developer('John', 25, 'male', 'New York');
-// console.log('🚀 ~ developer:', developer);
-// developer.printInfo();
-
 function AddPrinter(constrClass: Function) {
   console.dir(constrClass);
   constrClass.prototype.printInfo = function () {
@@ -54,5 +25,46 @@ class Developer {
 }
 const developer: any = new Developer('John', 25, 'male', 'New York');
 developer.printInfo();
-// класс может быть маленьким, с помощбю декораторов мы можем его декомпозировать, вынеся отдельный функционал в функции, в отдельные файлы, и запрашивая эти функции-декораторы к некоемому базовому классу, мы полностью меняем его возможности
-//расширяются возможности по декомпозиции и переиспользованию кода где угодно
+
+// -----------------
+
+function Override(label: string) {
+  return function (target: any, key: string) {
+    // console.log('🚀 ~ key:', key);
+    // console.log('🚀 ~ target:', target);
+    Object.defineProperty(target, key, {
+      configurable: false,
+      get: () => label,
+      set: (v) => {}
+    });
+  };
+}
+
+function ReadOnly(target: any, key: string) {
+  // console.log('🚀 ~ key:', key);
+  // console.log('🚀 ~ target:', target);
+  Object.defineProperty(target, key, {
+    // value: 'Default value',
+    get: () => 'Default value',
+    // writable: false
+    set: (v) => {}
+  });
+}
+
+class Test {
+  // @Override('Hello world')
+  @ReadOnly //без скобок - таргет и ключ получаем напрямую, минуя функцию - обертку
+  castomKey: string = 'any string';
+}
+
+const t = new Test();
+// если декоратор выключить   // @Override('Hello world')
+// console.log(t.castomKey); //any string
+// t.castomKey = 'new string name';
+// console.log(t.castomKey); //new string name
+
+// если декоратор включить   @Override('Hello world') - свойство закрыто от записи, получило некое значение
+// по сути класс запечатан с помощью замены базового значения
+console.log(t.castomKey); //Hello world
+t.castomKey = 'new string name';
+console.log(t.castomKey); //Hello world
