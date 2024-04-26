@@ -1,63 +1,18 @@
 "use strict";
-function getLength(item) {
-    //так интерфейс описан непосредственно в функции
-    //getLength(item: { length: number }) фигурные скобки не объект, а конкретное свойство
-    console.log(item.length);
+// Концепция обобщений (generics) в TypeScript позволяет создавать функции, классы и интерфейсы, которые могут работать с различными типами данных, не теряя при этом информации о типах. Это делает код более универсальным и повышает его переиспользуемость.
+//
+// Функция getData<T>(data: T): T представляет собой обобщенную функцию, которая принимает аргумент data типа T и возвращает значение того же типа T.Обобщенный параметр T может быть использован для представления произвольного типа данных.
+//
+function getData(data) {
+    return data;
 }
-const obj = { name: 'Object name', length: 20 };
-// у них есть описанное свойство
-getLength('any string'); //10
-getLength([1, 2, 3]); //3
-getLength(obj); //20
-// в этом коде ошибка - нет описанного св-ва
-// const people = { name: 'Jhon', age: 20 };
-// getLength(people);
-console.log('------------------');
-// чтобы ОБЯЗАТЬ класс реализовать определенные свойства-методы ИМПЛЕМЕНТИРУЮТ соответсвтующие интерфейсы
-class Person {
-    constructor() {
-        this.name = 'Jhon';
-        this.age = 25;
-        this.gender = 'male';
-        // можем реализовать свойства, не указанные в интерфейсе
-        this.city = 'Kharkiv';
-        this.skills = ['html', 'css'];
-    }
-    getSkills() {
-        return this.skills;
-    }
-    greet(msg) {
-        console.log('Hi!');
-    }
-}
-const person = new Person();
-class Rectangle {
-    constructor(width, height) {
-        this.width = width;
-        this.height = height;
-        this.name = 'Rectangle';
-    }
-    printArea() {
-        const area = this.width * this.height;
-        return `Area of a ${this.name} is ${area}`;
-    }
-}
-class Circle {
-    constructor(radius) {
-        this.radius = radius;
-        this.name = 'Circle';
-    }
-    printArea() {
-        const area = +(Math.PI * this.radius ** 2).toFixed(2);
-        return `Area of a ${this.name} is ${area}`;
-    }
-}
-const rectangle = new Rectangle(100, 200);
-const circle = new Circle(30);
-console.log(rectangle.printArea());
-console.log(circle.printArea());
-console.log('------------------');
-const shapes = [];
-shapes[0] = rectangle;
-shapes[1] = circle;
-shapes.forEach((shape) => console.log(shape.printArea()));
+// Вызов функции с различными типами данных
+console.log(getData('any string').length); // Возвращает длину строки
+console.log(getData(123).toFixed(2)); // Преобразует число в строку с двумя знаками после запятой
+// При вызове getData('any string') обобщенный параметр T заменяется на тип string, поэтому возвращаемое значение также имеет тип string, и мы можем использовать метод length, который определен для строк.
+// При вызове getData(123) обобщенный параметр T заменяется на тип number, поэтому возвращаемое значение также имеет тип number, и мы можем использовать метод toFixed, который определен для чисел.
+// const newGetDat = [];
+// чтобы показать что именно мы ждем мы должны сказать, что это тип - функция, мы что-то здесь получим и что-то должны вернуть, функцию типизируем также как и объявляли; название (data -> d) может быть любым, главное порядок. теперь можно присвоить только ф-ю соответствующего типа, которая принимает на вход одинакового типа данные, с ними работает и возвращает
+const newGetData = getData;
+console.log(newGetData('any string').length);
+console.log(newGetData(123).toFixed(2));
